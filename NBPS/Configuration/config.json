@@ -1,0 +1,21 @@
+{
+  "MongoConnectionURL": "",
+
+  "StarPoints": 0,
+  "Tickets": 0,
+  "Gold": 100,
+  "Gems": 10,
+  "Trophies": 0,
+  "ExperiencePoints": 0,
+  "BrawlBoxTokens": 0,
+  "BigBoxTokens": 0,
+  "Region": "PL",
+  "ThemeID": 1,
+  "ContentCreatorCodes": ["NBPS"],
+  "BannedIPs": [],
+  "Maintenance": false,
+  "SecondsTillMaintenanceOver": 3600,
+  "Patch": false,
+  "PatchURL": "http://192.168.0.103:8080/",
+  "UpdateURL": ""
+}

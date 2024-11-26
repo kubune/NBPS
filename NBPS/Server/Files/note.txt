@@ -1,0 +1,1 @@
+Here are files for server data like database for example.

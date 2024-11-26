@@ -1,0 +1,53 @@
+{
+   "ActiveEvents":[
+      {  
+         "EventIndex": 1,
+         "ID":7,
+         "Status":3,
+         "Ended":false,
+         "Timer": 99999,
+         "TextEntry": "",
+         "Modifier":0
+      },
+      {
+         "EventIndex": 2,
+         "ID":15,
+         "Status":3,
+         "Ended":false,
+         "Timer": 99999,
+         "TextEntry": "",
+         "Modifier":0
+      },
+      {
+         "EventIndex": 7,
+         "ID":15,
+         "Status":3,
+         "Ended":false,
+         "Timer": 99999,
+         "TextEntry": "",
+         "Modifier":0
+      },
+      {
+         "EventIndex": 9,
+         "ID":15,
+         "Status":3,
+         "Ended":false,
+         "Timer": 99999,
+         "TextEntry": "",
+         "Modifier":0
+      },
+      {
+         "EventIndex": 10,
+         "ID":15,
+         "Status":3,
+         "Ended":false,
+         "Timer": 99999,
+         "TextEntry": "",
+         "Modifier":0
+      }
+   ],
+
+   "ComingUpEvents":[
+
+   ]
+}
