@@ -7,6 +7,5 @@ class MatchMakingCancelledMessage(Writer):
         self.id = 20406
         self.player = player
 
-
     def encode(self):
         pass

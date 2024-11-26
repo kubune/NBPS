@@ -1,0 +1,11 @@
+{
+  "showLobbyInfo": true,
+  "skipTutorial": true,
+
+  "customLobbyInfo": {
+    "enabled": true,
+    "lines": [
+      "You can change this text in Configuration/server.json!"
+    ]
+  }
+}

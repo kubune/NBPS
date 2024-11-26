@@ -6,6 +6,10 @@ from NBPS.Logic.Handlers.CsvLogic.Skins import Skins
 from NBPS.Logic.Handlers.CsvLogic.Cards import Cards
 from NBPS.Logic.Handlers.CsvLogic.Emotes import Emotes
 
+from NBPS.Logic.Handlers.ServerConfig import ServerConfig
+
+serverConfig = ServerConfig().load()
+
 class Player:
     try:
         config = open('NBPS/Configuration/config.json', 'r')
@@ -23,6 +27,7 @@ class Player:
 
     ID = 0
     token = None
+    IP = ""
 
     trophies = settings['Trophies']
     tickets = settings['Tickets']
@@ -58,7 +63,14 @@ class Player:
     patch_sha = Fingerprint.loadFinger("NBPS/Logic/Assets/fingerprint.json")
     update_url = settings['UpdateURL']
     TrophiesAnimation = 0
-    tutorial = 2
+
+    tutorial = 0
+
+    if serverConfig.get('skipTutorial'):
+        tutorial = 2  # Disabled
+    else:
+        tutorial = 0 # Enabled
+
 
     delivery_items = {}
     box_rewards = {}

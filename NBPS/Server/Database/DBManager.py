@@ -11,6 +11,7 @@ class DB:
 
         self.data = {
             'Name': 'Guest',
+            'IP': Player.IP,
             'NameSet': False,
             'Gems': Player.gems,
             'Trophies': Player.trophies,

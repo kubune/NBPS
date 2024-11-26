@@ -7,6 +7,7 @@ from NBPS.Logic.Handlers.Helpers import Helpers
 from NBPS.Logic.Messages.LogicLaserMessageFactory import packets
 from NBPS.Logic.Messages.Server.Auth.LoginFailedMessage import LoginFailedMessage
 from NBPS.Server.Database.DBManager import DB
+
 def _(*args):
     for arg in args:
         print(arg, end=' ')
@@ -22,6 +23,7 @@ class ClientThread(Thread):
         self.config = json.loads(open('NBPS/Configuration/config.json', 'r').read())
         self.device = Device(self.client)
         self.player = Player(self.device)
+        self.player.IP = address[0]
 
 
     def recvall(self, length: int):
@@ -48,6 +50,8 @@ class ClientThread(Thread):
 
                 if len(header) > 0:
 
+                    self.banned = json.loads(open('NBPS/Configuration/banned.json', "r").read())
+
                     last_packet = time.time()
 
                     # Packet Info
@@ -55,9 +59,9 @@ class ClientThread(Thread):
                     packet_length = int.from_bytes(header[2:5], 'big')
                     packet_data = self.recvall(packet_length)
 
-                    if self.address[0] in self.config['BannedIPs']:
+                    if self.address[0] in self.banned.keys():
                         self.player.err_code = 11
-                        LoginFailedMessage(self.client, self.player, 'Account banned!').send()
+                        LoginFailedMessage(self.client, self.player, f'Account banned!\nReason: {self.banned[self.player.IP]}').send()
 
 
                     if packet_id in packets:
@@ -70,6 +74,8 @@ class ClientThread(Thread):
 
                         if packet_id == 10101:
                             Helpers.connected_clients["Clients"][str(self.player.ID)] = {"SocketInfo": self.client}
+                            self.db.update_player_account(self.player.token, 'IP', self.player.IP)
+
 
                     else:
                         _(f'{Helpers.cyan}[CLIENT] Unhandled Packet! ID: {packet_id}, Length: {packet_length}')

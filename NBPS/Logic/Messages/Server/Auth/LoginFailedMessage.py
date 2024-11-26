@@ -9,7 +9,7 @@ class LoginFailedMessage(Writer):
         self.id = 20103
         self.player = player
         self.msg = msg
-        self.fingerprint = Fingerprint.loadFinger_full("GameAssets/fingerprint.json")
+        self.fingerprint = Fingerprint.loadFinger_full("NBPS/Logic/Assets/fingerprint.json")
 
         """
         << Error Code List >>

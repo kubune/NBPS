@@ -3,7 +3,6 @@ import socket
 from NBPS.Logic.Handlers.Helpers import Helpers
 from NBPS.Server.Network.ClientThread import ClientThread
 
-
 def _(*args):
     for arg in args:
         print(arg, end=' ')
