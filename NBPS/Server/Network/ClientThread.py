@@ -7,11 +7,14 @@ from NBPS.Logic.Handlers.Helpers import Helpers
 from NBPS.Logic.Messages.LogicLaserMessageFactory import packets
 from NBPS.Logic.Messages.Server.Auth.LoginFailedMessage import LoginFailedMessage
 from NBPS.Server.Database.DBManager import DB
+from NBPS.Logic.Handlers.Debugger import _print, Colors, Styles
 
-def _(*args):
+def _(colors, *args):
+    text = ""
     for arg in args:
-        print(arg, end=' ')
-    print()
+        text += arg + " "
+    _print(text, colors[0], colors[1])
+
 
 
 class ClientThread(Thread):
@@ -33,7 +36,7 @@ class ClientThread(Thread):
             s = self.client.recv(length)
 
             if not s:
-                _(f"{Helpers.red}ERROR while receiving data!")
+                _([Colors.RED, Colors.YELLOW], f"[ERROR] while receiving data!")
                 break
 
             data += s
@@ -66,7 +69,7 @@ class ClientThread(Thread):
 
                     if packet_id in packets:
                         packet_name = packets[packet_id].__name__
-                        _(f'{Helpers.blue}[CLIENT] PacketID: {packet_id}, Name: {packet_name} Length: {packet_length}')
+                        _([Colors.GREEN, Colors.CYAN],f'[CLIENT] PacketID: {packet_id}, Name: {packet_name} Length: {packet_length}')
 
                         message = packets[packet_id](self.client, self.player, packet_data)
                         message.decode()
@@ -78,29 +81,29 @@ class ClientThread(Thread):
 
 
                     else:
-                        _(f'{Helpers.cyan}[CLIENT] Unhandled Packet! ID: {packet_id}, Length: {packet_length}')
+                        _([Colors.GRAY, Colors.PINK],f'[CLIENT] Unhandled Packet! ID: {packet_id}, Length: {packet_length}')
 
                 if time.time() - last_packet > 10:
-                    _(f"{Helpers.cyan}[DEBUG] Client disconnected! IP: {self.address[0]}")
+                    _([Colors.WHITE, Colors.GRAY],f"[DEBUG] Client disconnected! IP: {self.address[0]}")
                     self.client.close()
                     self.db.close()
-                    _(f"{Helpers.cyan}[DEBUG] Client disconnected! IP: {self.address[0]}")
+                    _([Colors.WHITE, Colors.GRAY],f"[DEBUG] Client disconnected! IP: {self.address[0]}")
                     Helpers.connected_clients['ClientsCount'] -= 1
                     break
 
 
         except ConnectionAbortedError:
-            _(f"{Helpers.cyan}[DEBUG] Client disconnected! IP: {self.address[0]}")
+            _([Colors.WHITE, Colors.GRAY],f"[DEBUG] Client disconnected! IP: {self.address[0]}")
             self.client.close()
             self.db.close()
             Helpers.connected_clients['ClientsCount'] -= 1
         except ConnectionResetError:
-            _(f"{Helpers.cyan}[DEBUG] Client disconnected! IP: {self.address[0]}")
+            _([Colors.WHITE, Colors.GRAY],f"[DEBUG] Client disconnected! IP: {self.address[0]}")
             self.client.close()
             self.db.close()
             Helpers.connected_clients['ClientsCount'] -= 1
         except TimeoutError:
-            _(f"{Helpers.cyan}[DEBUG] Client disconnected! IP: {self.address[0]}")
+            _([Colors.WHITE, Colors.GRAY],f"[DEBUG] Client disconnected! IP: {self.address[0]}")
             self.client.close()
             self.db.close()
             Helpers.connected_clients['ClientsCount'] -= 1

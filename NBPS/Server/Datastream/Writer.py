@@ -1,4 +1,11 @@
 from NBPS.Logic.Handlers.Helpers import Helpers
+from NBPS.Logic.Handlers.Debugger import _print, Colors, Styles
+
+def _(colors, *args):
+    text = ""
+    for arg in args:
+        text += arg + " "
+    _print(text, colors[0], colors[1])
 
 class Writer:
     def __init__(self, client, endian: str = 'big'):
@@ -57,7 +64,7 @@ class Writer:
             self.writeInt16(0)
         self.buffer += packet + b'\xff\xff\x00\x00\x00\x00\x00'
         self.client.send(self.buffer)
-        print(f'{Helpers.yellow}[SERVER] PacketID: {self.id}, Name: {type(self).__name__}, Length: {len(self.buffer)}')
+        _([Colors.CYAN, Colors.YELLOW],f'[SERVER] PacketID: {self.id}, Name: {type(self).__name__}, Length: {len(self.buffer)}')
 
 
     def sendByID(self, ID):

@@ -1,8 +1,9 @@
 import os
 import json
 import requests
+from NBPS.Logic.Handlers.Debugger import banner, Colors, Styles
 
-versionCode = 1
+versionCode = 2
 
 versionCodeFromGithub = requests.get("https://raw.githubusercontent.com/kubune/NBPS/refs/heads/master/NBPS/Server/Extra/versionCode.txt")
 if versionCodeFromGithub.status_code == 200:
@@ -12,6 +13,17 @@ if versionCodeFromGithub.status_code == 200:
 Files = "NBPS/Server/Files"
 
 changelog = """
+    Changelog:
+    
+    1.2
+    - Added maintenance. "maintenance" command
+    - Added Custom Inbox.
+    - Added option to turn maintenance off by using "maintenance off" command
+    - Added gradient colors in console.
+    
+"""
+
+changelog1_1 = """
 
     Changelog:
     
@@ -65,7 +77,7 @@ class Changelog:
         data = self.loadStates()
         state_SeenChangelog = data.get('SeenChangelog', False)
         if not state_SeenChangelog:
-            print(changelog)
+            banner(changelog, Colors.GRAY, Colors.ORANGE, 10, Styles.BOLD)
             self.changeValue('SeenChangelog', True)
         else:
             pass

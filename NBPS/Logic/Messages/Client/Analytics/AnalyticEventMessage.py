@@ -11,7 +11,7 @@ class AnalyticEventMessage (Reader):
         self.Event = self.readString()
 
     def process(self, db):
-        print("" + self.Type + " " + self.Event)
+        #print("" + self.Type + " " + self.Event)
         if self.Event == '{"step":"click_to_end","step_id":"18"}':
             self.player.tutorial += 1
             db.update_player_account(self.player.token, 'Tutorial', self.player.tutorial)

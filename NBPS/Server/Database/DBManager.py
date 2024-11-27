@@ -88,6 +88,12 @@ class DB:
     		if collection["ID"] == id:
     			return collection
 
+    def get_player_data_by_ip(self, ip):
+        collections = self.client.load_all()
+        for collection in collections:
+            if collection["IP"] == ip:
+                return collection
+
     def update_player_account(self, token, item, value):
         self.client.update(token, item, value)
 

@@ -2,6 +2,8 @@ import json
 import string
 import random
 from colorama import Fore
+from websockets.asyncio.client import connect
+
 
 class Helpers:
     connected_clients = {"ClientsCount": 0, "Clients": {}}
@@ -11,6 +13,9 @@ class Helpers:
     blue = Fore.LIGHTBLUE_EX
     cyan = Fore.CYAN
     red = Fore.RED
+
+    def get_clients(self):
+        return self.connected_clients
 
     def randomToken(self):
         lettersAndDigits = string.ascii_letters + string.digits
@@ -55,6 +60,7 @@ class Helpers:
     def load_account(self, player_data):
         self.player.token = player_data["Token"]
         self.player.name_set = player_data['NameSet']
+        self.player.IP = player_data['IP']
         self.player.name = player_data['Name']
         self.player.trophies = player_data['Trophies']
         self.player.gems = player_data['Gems']

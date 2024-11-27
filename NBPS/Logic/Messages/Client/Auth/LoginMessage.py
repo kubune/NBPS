@@ -7,6 +7,7 @@ from NBPS.Logic.Messages.Server.Alliance.MyAllianceMessage import MyAllianceMess
 from NBPS.Logic.Messages.Server.Alliance.AllianceStreamMessage import AllianceStreamMessage
 from NBPS.Logic.Messages.Server.Home.LobbyInfoMessage import LobbyInfoMessage
 
+import json
 
 class LoginMessage(Reader):
     def __init__(self, client, player, initial_bytes):
@@ -14,6 +15,7 @@ class LoginMessage(Reader):
         self.player = player
         self.client = client
         self.helpers = Helpers()
+        self.config = json.loads(open('NBPS/Configuration/config.json', 'r').read())
 
     def decode(self):
 
@@ -28,7 +30,7 @@ class LoginMessage(Reader):
 
     def process(self, db):
 
-        if self.player.maintenance:
+        if self.config['Maintenance']:
             self.player.err_code = 10
             LoginFailedMessage(self.client, self.player, '').send()
 
