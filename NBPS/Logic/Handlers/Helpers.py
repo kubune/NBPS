@@ -1,19 +1,10 @@
 import json
 import string
 import random
-from colorama import Fore
-from websockets.asyncio.client import connect
-
 
 class Helpers:
     connected_clients = {"ClientsCount": 0, "Clients": {}}
-
-    yellow = Fore.YELLOW
-    green = Fore.GREEN
-    blue = Fore.LIGHTBLUE_EX
-    cyan = Fore.CYAN
-    red = Fore.RED
-
+    
     def get_clients(self):
         return self.connected_clients
 
